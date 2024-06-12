@@ -1,0 +1,124 @@
+@keyframes loco{
+    0% {background: blue; transform: rotate(10deg) scale(1,1);}
+    20% {background: red; transform: rotate(10deg) scale(1.5,1.5);}
+    40% {background: yellow; transform: rotate(10deg) scale(1,1);}
+    60% {background: silver; transform: rotate(10deg) scale(1.5,1.5);}
+    80% {background: green; transform: rotate(10deg) scale(1,1);}
+    90% {background: goldenrod; transform: rotate(10deg) scale(2,2);}
+    100% {background: fuchsia; transform: rotate(10deg) scale(1);}
+}
+
+.contenedor{
+    align-items: center;
+    border: solid 0.1em;
+    display: flex;
+    height: 500px;
+    justify-content: space-around;
+}
+
+.contenedor div{
+    border: solid 0.1em;
+    filter: invert(1);  /* se coloca filtro */
+    height: 400px;  /*  altura de la imagen  */
+    transition: all linear 2s; /* tiempo en la transicion del filtro */
+    width: 25%; /* 25% por que son 4 imagenes y no se quiere que quede muy apretado al 100% de la pantalla */
+}
+
+.contenedor div:hover{  /* hover es sobre de, cuando este sobre la imagen hace un movimiento la imagen */
+    background-size: 100% 100%; /* tamaño de la imagen */
+    filter: invert(0); /* con este filtro regresa despues de los 2 segundos al color normal */
+}
+
+.cupon{
+    display: none; /* no me muestra el titulo del cupon en la pagina principal*/
+    font-size: 48px;
+    font-style: italic;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.hija1{
+    background: url(naruto.jpg);
+    background-size: cover; /* tamaño de la imagen */
+}
+
+.hija2{
+    background: url(naruto1.jpg);
+    background-size: cover; /* tamaño de la imagen */
+}
+
+.hija3{
+    background: url(naruto2.jpg);
+    background-size: cover; /* tamaño de la imagen */
+}
+
+.hija4{
+    background: url(naruto3.jpg);
+    background-size: cover; /* tamaño de la imagen */
+}
+
+.imprimir{
+    margin: 1em auto; /* con estas medidas se pueden centrar y el 1em separa el boton del recuadro */
+    border-radius: 1em; /* quedan los bordes redondos */ 
+    box-shadow: 0.1em 0.2em 0.3em rgba(0, 0, 0, 0.5); /* se le da sombreado al boton */
+    background: #3d7494 url("impreso.png") no-repeat 10px 7px; /* se da color de fondo y adicional se inserta una imagen, la cual se le da ubicacion sobre eje x y eje y */
+    background-size: 35px 35px; /* tamaño de la imagen de la impresora */
+    font-style: italic;
+    font-size: 24px;
+    display: block;  /* permite que se active el margin */ 
+    padding: 0.4em;
+    width: 50%;
+}
+
+.imprimir:hover{
+    cursor: pointer;
+}
+
+@media print {  
+    .hija1,.hija3{ /* decimos que solo se impriman las imagenes 2 y 4 */
+        display: none;
+    }
+    .contenedor{
+        background-color: rgb(66, 80, 39); /* se le da color de fondo solo a la hoja */
+        flex-direction: column; /* damos ubicacion de columna a las imagnes */
+    }
+
+    .contenedor div{ /* quitamos los filtros y dicimos que cada imagen ocupe el 50% de la hoja */
+        filter: none;
+        width: 50%;
+    }
+    .cupon{
+        display: block; /* convierte algo en un bloque, o se usa para mostrar algo */
+    }
+    .imprimir{
+        display: none; /* no se muestra este boton en la impresion */ 
+    }
+}
+
+@media screen and (orientation: landscape){ /* cuando la ubicacion de la patalla del celular es horizontal cambia de color*/
+    body{
+        background: rgb(163, 199, 64);
+    }
+}
+
+@media screen and (orientation: portrait){ /* cuando la ubicacion de la patalla del celular es vertical cambia de color */
+    body{
+        background: lightskyblue;
+    }
+}
+
+@media screen and (max-width:700px){
+    .contenedor{
+        flex-direction: column; /* damos ubicacion de columna a las imagnes para que se vea mejor en el celular*/
+        height: auto; /* se le deja la altura automatica al entrar en pantalla de celular */
+    }
+    .contenedor div{
+        filter: invert(0);  /* coloca filtro al momento de reducir la pantalla a celular */
+        height: 400px; /* altura de 400px al reduccir la pantalla a la del celular */
+        margin-top: 1em; /* separa las imagenes cuando estan en modo pantalla celular */
+        width: 100%; /* toma el 100% del ancho de la imagen */
+    }
+    .contenedor .hija1{
+        animation: loco alternate infinite 8s; /* se le da animacion a la imagen 2 por la cantidad de segundos que se le ponga*/
+    }
+}
